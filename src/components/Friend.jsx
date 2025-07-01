@@ -1,3 +1,5 @@
+import Button from "./Button.jsx";
+
 function Friend({ friend }) {
   return (
     <li>
@@ -14,6 +16,7 @@ function Friend({ friend }) {
         <p>You and {friend.name} are even</p>
       )}
       <h3>{friend.name}</h3>
+      <Button>Select</Button>
     </li>
   );
 }
