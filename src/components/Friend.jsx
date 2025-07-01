@@ -1,9 +1,10 @@
 import Button from "./Button.jsx";
 
-function Friend({ friend }) {
+function Friend({ friend, onSelection, selectedFriend }) {
+  const isSelected = selectedFriend?.id === friend.id;
   return (
-    <li>
-      <img src={friend.image} alt={friend.anem} />
+    <li className={isSelected ? "selected" : ""}>
+      <img src={friend.image} alt={friend.name} />
       {friend.balance < 0 ? (
         <p className="red">
           You Owe {friend.name} {Math.abs(friend.balance)}{" "}
@@ -16,7 +17,10 @@ function Friend({ friend }) {
         <p>You and {friend.name} are even</p>
       )}
       <h3>{friend.name}</h3>
-      <Button>Select</Button>
+
+      <Button onClick={() => onSelection(friend)}>
+        {!isSelected ? "Select" : "Close"}
+      </Button>
     </li>
   );
 }

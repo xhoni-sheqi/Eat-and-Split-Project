@@ -8,6 +8,7 @@ import { initialFriends } from "../costants/index.js";
 function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
   const handleAddFriendForm = () => {
     setShowAddFriend((prev) => !prev);
   };
@@ -15,16 +16,23 @@ function App() {
     setFriends((friends) => [...friends, friend]);
     handleAddFriendForm();
   };
+  const handleSelectFriend = (friend) => {
+    setSelectedFriend((cur) => (cur?.id === friend.id ? null : friend));
+  };
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendsList friends={friends} />
+        <FriendsList
+          friends={friends}
+          onSelection={handleSelectFriend}
+          selectedFriend={selectedFriend}
+        />
         {showAddFriend && <FormAddFriend onSetFriend={handleSetFriends} />}
         <Button onClick={handleAddFriendForm}>
           {showAddFriend === true ? "Close" : "Add Friend"}
         </Button>
       </div>
-      <FormSplitBill />
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
     </div>
   );
 }
