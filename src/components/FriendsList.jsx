@@ -1,9 +1,6 @@
-import { initialFriends } from "../../costants/index.js";
 import Friend from "./Friend.jsx";
 
-function FriendsList() {
-  const friends = initialFriends;
-
+function FriendsList({ friends }) {
   return (
     <ul>
       {friends.map((friend) => (
